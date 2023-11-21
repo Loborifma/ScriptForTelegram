@@ -3,6 +3,8 @@ function delay(ms) {
 }
 
 async function init() {
+  let isSendMes = false;
+
   function findLast(arr, className) {
     return arr[arr.length - 1].querySelectorAll(className);
   }
@@ -57,22 +59,25 @@ async function init() {
         messageField.classList.remove("is-empty");
         messageField.innerHTML = "Беру";
         sendButton.click();
-        isAlreadyAnswered = true;
+        isSendMes = true;
       }
     };
   }
 
   const tmp = sendMessage();
 
-  setInterval(tmp, 10000);
+  setInterval(tmp, 1000);
+
+  if (isSendMes) {
+    await delay(5000);
+    isSendMes = false;
+  }
 }
 
 (async function addNavLinks() {
   await delay(5000);
 
-  const utilPanel = document.querySelector(
-    ".chat-info-container > .chat-utils"
-  );
+  const utilPanel = document.querySelector(".header-tools > .HeaderActions");
 
   const scriptStartButton = document.createElement("button");
 
