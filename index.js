@@ -55,7 +55,7 @@ async function init() {
 
   const tmp = sendMessage();
 
-  setInterval(tmp, 2000);
+  setInterval(tmp, 1000);
 }
 
 (async function addNavLinks() {
