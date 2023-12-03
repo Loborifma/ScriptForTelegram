@@ -8,6 +8,8 @@ async function init() {
   }
 
   function sendMessage() {
+    let isAlreadyAnswered = false;
+
     const messageField = document.querySelector(
       ".input-message-input.is-empty.i18n.scrollable.scrollable-y.no-scrollbar"
     );
@@ -17,6 +19,7 @@ async function init() {
     const dateList = document.querySelectorAll(".bubbles-date-group");
 
     let messageGroupList = findLast(dateList, ".bubbles-group");
+
     let lastMessage = findLast(
       messageGroupList,
       ".bubble > .bubble-content-wrapper > .bubble-content > .message"
@@ -45,10 +48,16 @@ async function init() {
         );
 
       if (isShift !== -1) {
+        if (isAlreadyAnswered) {
+          await delay(1000);
+          isAlreadyAnswered = false;
+          return;
+        }
         await delay(1000);
         messageField.classList.remove("is-empty");
         messageField.innerHTML = "Беру";
         sendButton.click();
+        isAlreadyAnswered = true;
       }
     };
   }
