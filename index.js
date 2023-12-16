@@ -1,3 +1,6 @@
+const triggerWords = /(Отдам|Who wants)/gi;
+const delayBetweenTriggerInMinutes = 20;
+
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -45,9 +48,7 @@ async function init() {
       lastMessage = [...currentLastMessage];
 
       const isShift =
-        lastMessage[lastMessage.length - 1].innerHTML.search(
-          /(Отдам|Who wants)/gi
-        );
+        lastMessage[lastMessage.length - 1].innerHTML.search(triggerWords);
 
       if (isShift !== -1) {
         if (isAlreadyAnswered) {
@@ -69,7 +70,7 @@ async function init() {
   setInterval(tmp, 1000);
 
   if (isSendMes) {
-    await delay(5000);
+    await delay(delayBetweenTriggerInMinutes * 60000);
     isSendMes = false;
   }
 }
