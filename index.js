@@ -76,8 +76,6 @@ async function init() {
 }
 
 (async function addNavLinks() {
-  await delay(5000);
-
   const utilPanel = document.querySelector(".header-tools > .HeaderActions");
 
   const scriptStartButton = document.createElement("button");
